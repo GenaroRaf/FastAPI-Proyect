@@ -1,6 +1,11 @@
 from fastapi import APIRouter
 from app.schemas import Proyect
 import paramiko
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 router = APIRouter(
     prefix="/proyect",
@@ -21,7 +26,6 @@ def crear_proyecto(proyect: Proyect):
 @router.get('/')
 def obtener_proyecto():
     proyecto = proyectos[0]["detail"]
-    print("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     print(proyecto)
     for key, value in proyecto.items():
         if key == "state":
@@ -35,13 +39,13 @@ def hola(status:str):
     print(status)
 
 def configurar_entorno_remoto(status: str):
-    hostname = "192.168.2.27"  
-    username = "cliente1"
-    password = "1234"
+    hostname = os.getenv('HOST_NAME')  
+    username = os.getenv('USER_NAME')
+    key_pem = os.path.join(os.getcwd(), 'KEY_NAME')
     
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(hostname, username=username, password=password)
+    ssh.connect(hostname, username=username, key_filename=key_pem)
 
     script_content = f"""import os
 os.system('echo \"{status}\" > salida.txt')
