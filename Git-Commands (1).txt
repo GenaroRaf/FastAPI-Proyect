@@ -1,0 +1,64 @@
+git --version
+git clone url-repositorio
+git status
+git add nombreArchivo.extension
+
+Identificación General (solo se hace una vez para identificarte)
+git config --global user.email "correo-electronico"
+git config --global user.name "nombre-usuario"
+
+Confirmaciones
+git commit -m "Mensaje de confirmación"
+
+Historial
+git log --all --decorate --oneline --graph
+
+Actualizar origen
+git push origin (en github se sube)
+git pull (en local se descarga)
+
+Actualización remota (no local) 
+git fetch
+
+Comando de fusión
+git merge origin
+
+(ID de los commits, historial avanzado)
+git reflog
+
+Reseteo de commits (deshace un commit o la eliminación de un commit)
+git reset --hard ID-Commit (forzado)
+
+Nota: si eliminas un commit se eliminarán aquellos que hiciste despues de ese, todo aquel que este relacionado a este commit.
+
+
+Revertir
+git revert ID-Commit (solo deshace el commit seleccionado, no afecta a otros)
+git cherry-pick (deshace el revert del ID-Commit especificado)
+
+
+Para subir un repositorio local al remoto
+
+
+1.Primero debes de crear un repositorio vacío en git hub (sin readme)
+2.Incializar repositorio: git init
+3.Despues poner: git branch -M main
+4.Posteriormente poner: git remote add github https://github.com/GenaroRaf/no-more-fear.git
+5. Por último poner: git push -u github main
+
+Para crear bifurcaciones (ramas)
+git switch -c nombre de la rama
+git switch master (regresar a la rama principal)
+
+Una rama o bifurcación es otro camino que puede hacer para realizar o experimentar cambios sin afectar a la rama principal (master).
+
+Otra forma de merge
+git rebase (merge mojorado)
+git rebase -- abort (abortar rebase)
+git rebase --continue (continuar rebase)
+git rebase --skip (saltar rebase)
+git rebase -i ID-Commit (sirve para hacer un merge iterativo, escogiendo un commit y dentro se especifica cual quieres desechar con "squash"
+
+Papelera
+git stash (mandar a papelera un archivo o los cambios)
+git stash pop (trae de vuelta lo de la papelera)
